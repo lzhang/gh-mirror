@@ -102,7 +102,10 @@ def description(description_file, description):
     """
 
     with open(description_file, "wb") as f:
-        f.write(description.encode("utf8") + b"\n")
+        if description:
+            f.write(description.encode("utf8") + b"\n")
+        else:
+            f.write("".encode("utf8") + b"\n")
 
 def remotely_deleted_repos(remote_repos):
     """
