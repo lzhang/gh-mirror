@@ -1,8 +1,0 @@
-language: python
-install:
-  - "pip install --use-mirrors mock requests"
-python:
-  - "2.7"
-  - "3.2"
-  - "3.3"
-script: nosetests
