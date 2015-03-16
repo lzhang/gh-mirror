@@ -8,7 +8,6 @@ This can be useful when maintaining a local mirror.
 
 from __future__ import print_function
 import itertools
-import json
 import os
 import shutil
 import subprocess
@@ -25,16 +24,14 @@ def repos(org):
     """
 
     for page in itertools.count(start=1):
-        res_handle = requests.get(
+        res = requests.get(
             "https://api.github.com/orgs/%s/repos?page=%d" % (org, page)
-        )
-        res_encoding = "utf8"
-        res_json = json.loads(res_handle.text.decode(res_encoding))
+        ).json()
 
-        if not res_json:
+        if not res:
             break
 
-        for repo in res_json:
+        for repo in res:
             yield {
                 "description": repo["description"],
                 "url":         repo["html_url"],
